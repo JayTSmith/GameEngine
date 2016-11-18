@@ -162,7 +162,7 @@ class CultFanatic(Boss):
         super(CultFanatic, self).__init__(name, maxHealth, speed, stamina, strength,
                                   intelligence, dexterity, numberOfPotions,
                                   inventory, aggression, awareness, fear)
-        self.weapon = Weapon(name='Battle Axe', base=15, bonus=2)
+        self.weapon = Weapon(name='Battle Axe', base=10, bonus=2)
         self.armor = Armor(name='Studded Leather', base=3, bonus=2)
 
 class Avatar(Boss):

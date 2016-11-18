@@ -83,10 +83,12 @@ class Boss(Monster):
             return "AI_error"
 
 class Orc(Monster):
-    ''' generic Orc class '''
+    ''' generic Orc class
+
+        this class '''
     def __init__(self,
                  name = "Dorque da Orc",
-                 maxHealth = 100,
+                 maxHealth = 10,
                  speed = 25,
                  stamina = 25,
                  strength = 8,
@@ -186,6 +188,13 @@ class Avatar(Boss):
                                   inventory, aggression, awareness, fear)
         self.weapon = Weapon(name='Blinding Blade', base=float('inf'), bonus=float('inf'))
         self.armor = Armor(name='Studded Leather', base=float('inf'), bonus=float('inf'))
+
+    def get_damage(self, damage):
+        damage -= 5  #damage reduction example, also, OVERLOADING
+        if damage < 0:
+            damage = 0
+
+        self.health -= damage
 
 def random_monster():
     '''generate a monster at random

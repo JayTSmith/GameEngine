@@ -51,6 +51,44 @@ class Monster(Character):
         else:
             return "AI_error"
 
+class Boss(Monster):
+    ''' Serves as a bass class for boss monsters that stops them from fleeing '''
+    def __init__(self,
+                 name = "Dorque da Orc",
+                 maxHealth = 100,
+                 speed = 25,
+                 stamina = 25,
+                 strength = 10,
+                 dexterity = 10,
+                 constitution = 10,
+                 intelligence = 10,
+                 wisdom = 10,
+                 charisma = 10,
+                 numberOfPotions = 2,
+                 inventory = [],
+                 aggression = 80,
+                 awareness = 30,
+                 fear = 20):
+        super(Boss, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
+                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
+                                     inventory, aggression, awareness, fear)
+
+    def combat_choice(self):
+        ''' combat AI
+
+            returns a, h, or f.  Based on aggression, awareness, morale
+
+            '''
+        attackValue = randint(1, 100) + self.aggression
+        healValue = randint(1, 100) + self.awareness
+
+        if attackValue >= healValue:
+            return "a"
+        elif healValue >= attackValue:
+            return "h"
+        else:
+            return "AI_error"
+
 class Orc(Monster):
     ''' generic Orc class
 
@@ -75,6 +113,111 @@ class Orc(Monster):
                                   dexterity, constitution, intelligence,
                                   wisdom, charisma, numberOfPotions,
                                   inventory, aggression, awareness, fear)
+
+class Chicken(Monster):
+    ''' generic Chicken class'''
+    def __init__(self,
+                 name = 'Clucky',
+                 maxHealth=5,
+                 speed=20,
+                 stamina=20,
+                 strength = 1,
+                 dexterity = 1,
+                 constitution = 1,
+                 intelligence = 1,
+                 wisdom = 1,
+                 charisma = 1,
+                 numberOfPotions=0,
+                 inventory=[],
+                 aggression=0,
+                 awareness=20,
+                 fear=80
+                 ):
+        super(Chicken, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
+                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
+                                     inventory, aggression, awareness, fear)
+
+class Raider(Monster):
+    '''generic Raider class'''
+    def __init__(self,
+                 name = 'Ray',
+                 maxHealth=100,
+                 speed=25,
+                 stamina=25,
+                 strength = 12,
+                 dexterity = 10,
+                 constitution = 10,
+                 intelligence = 6,
+                 wisdom = 10,
+                 charisma = 10,
+                 numberOfPotions=1,
+                 inventory=[],
+                 aggression=60,
+                 awareness=35,
+                 fear=50
+                 ):
+        super(Raider, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
+                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
+                                     inventory, aggression, awareness, fear)
+        self.weapon = Weapon(name='Longsword', base=8, bonus=1)
+        self.armor = Armor(name='Studded Leather', base=2, bonus=1)
+
+class CultFanatic(Boss):
+    ''' serves as a first Boss '''
+    def __init__(self,
+                 name = 'Francis',
+                 maxHealth=225,
+                 speed=25,
+                 stamina=25,
+                 strength = 16,
+                 dexterity = 10,
+                 constitution = 10,
+                 intelligence = 14,
+                 wisdom = 8,
+                 charisma = 16,
+                 numberOfPotions=4,
+                 inventory=[],
+                 aggression=75,
+                 awareness=25,
+                 fear=10
+                 ):
+        super(CultFanatic, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
+                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
+                                     inventory, aggression, awareness, fear)
+        self.weapon = Weapon(name='Battle Axe', base=10, bonus=2)
+        self.armor = Armor(name='Studded Leather', base=3, bonus=2)
+
+class Avatar(Boss):
+    ''' A monster that is a representation of a deity's spirit '''
+    def __init__(self,
+                 name = 'Francis',
+                 maxHealth=float('inf'),
+                 speed=50,
+                 stamina=1000000,
+                 strength = 18,
+                 dexterity = 18,
+                 constitution = 18,
+                 intelligence = 18,
+                 wisdom = 18,
+                 charisma = 18,
+                 numberOfPotions=10,
+                 inventory=[],
+                 aggression=75,
+                 awareness=25,
+                 fear=10
+                 ):
+        super(Avatar, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
+                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
+                                     inventory, aggression, awareness, fear)
+        self.weapon = Weapon(name='Blinding Blade', base=10000, bonus=10000)
+        self.armor = Armor(name='Studded Leather', base=10000, bonus=10000)
+
+    def get_damage(self, damage):
+        damage = round(damage / 4)
+        if damage < 0:
+            damage = 0
+
+        self.health -= damage
 
 def random_monster():
     '''generate a monster at random

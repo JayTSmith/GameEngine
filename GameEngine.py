@@ -170,7 +170,8 @@ if __name__ == "__main__":
     print(hero)
     #hero = Character()
     orc = Monster(name = "Dorque da Orc")
+    randy = random_monster()
 
-    combat(hero, orc)
+    combat(hero, randy)
 
     

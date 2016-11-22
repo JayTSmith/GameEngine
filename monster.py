@@ -53,25 +53,23 @@ class Monster(Character):
 
 class Boss(Monster):
     ''' Serves as a bass class for boss monsters that stops them from fleeing '''
+
     def __init__(self,
                  name = "Dorque da Orc",
                  maxHealth = 100,
                  speed = 25,
                  stamina = 25,
-                 strength = 10,
-                 dexterity = 10,
-                 constitution = 10,
-                 intelligence = 10,
-                 wisdom = 10,
-                 charisma = 10,
+                 strength = 8,
+                 intelligence = 8,
+                 dexterity = 8,
                  numberOfPotions = 2,
                  inventory = [],
                  aggression = 80,
                  awareness = 30,
                  fear = 20):
-        super(Boss, self).__init__(name, maxHealth, speed, stamina, strength, dexterity,
-                                     constitution, intelligence, wisdom, charisma, numberOfPotions,
-                                     inventory, aggression, awareness, fear)
+        super(Boss, self).__init__(name, maxHealth, speed, stamina, strength,
+                                  intelligence, dexterity, numberOfPotions,
+                                  inventory, aggression, awareness, fear)
 
     def combat_choice(self):
         ''' combat AI
@@ -126,7 +124,7 @@ class Chicken(Monster):
                  constitution = 1,
                  intelligence = 1,
                  wisdom = 1,
-                 charisma = 1,
+                 charisma = 1
                  numberOfPotions=0,
                  inventory=[],
                  aggression=0,
@@ -210,7 +208,6 @@ class Avatar(Boss):
                                      constitution, intelligence, wisdom, charisma, numberOfPotions,
                                      inventory, aggression, awareness, fear)
         self.weapon = Weapon(name='Blinding Blade', base=10000, bonus=10000)
-        self.armor = Armor(name='Studded Leather', base=10000, bonus=10000)
 
     def get_damage(self, damage):
         damage = round(damage / 4)
@@ -228,8 +225,12 @@ def random_monster():
     
     monster = Monster()
     orc = Orc()
+    chicken = Chicken()
+    raider = Raider()
+    leader = CultFanatic()
+    avatar = Avatar()
     
-    listOfMonsters = [monster, orc]
+    listOfMonsters = [monster, orc, chicken, raider, leader, avatar]
     return choice(listOfMonsters)
 
 
@@ -240,4 +241,4 @@ if __name__ == "__main__":
     #print(Randy.name)
 
 
-    
+
